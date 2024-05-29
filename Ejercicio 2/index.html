@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Ventas</title>
+</head>
+<body>
+    <h1>Formulario de Ventas de juegos</h1>
+    <form id="productForm">
+        <label for="nombreJuego">Nombre del Juego:</label>
+        <input type="text" id="nombreJuego" name="nombreJuego" required><br><br>
+
+        <label for="valorJuego">Valor Juego:</label>
+        <input type="number" id="valorJuego" name="valorJuego" required><br><br>
+
+        <label for="cantidadJuego">Cantidad de Juegos:</label>
+        <input type="number" id="cantidadJuego" name="cantidadJuego" required><br><br>
+
+        <button type="button" onclick="agregarProducto()">Registrar Venta</button>
+        <button type="button" onclick="totalCompra()">Total Compra</button>
+        <button type="button" onclick="totalRecaudado()">Total Recaudado</button>
+    </form>
+
+    <h2>Datos de Productos</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre Juego</th>
+                <th>Valor Juego</th>
+                <th>Cantidad de Juegos</th>
+            </tr>
+        </thead>
+        <tbody id="tablaJuegos">
+        </tbody>
+    </table>
+
+    <script>
+        function agregarProducto() {
+            const nombre = document.getElementById('nombreJuego').value;
+            const valor = parseFloat(document.getElementById('valorJuego').value);
+            const cantidad = parseFloat(document.getElementById('cantidadJuego').value);
+            const totalValor = valor * cantidad
+
+            const tabla = document.getElementById('tablaJuegos');
+            const nuevaFila = tabla.insertRow();
+
+            const celdaNombre = nuevaFila.insertCell(0);
+            const celdaValor = nuevaFila.insertCell(1);
+            const celdaCantidad = nuevaFila.insertCell(2);
+
+            celdaNombre.innerText = nombre;
+            celdaValor.innerText = valor.toFixed(2);
+            celdaCantidad.innerText = cantidad.toFixed(2);
+        }
+
+        function totalCompra() {
+            const valor = parseFloat(document.getElementById('valorJuego').value);
+            const cantidad = parseFloat(document.getElementById('cantidadJuego').value);
+            const totalCompra = valor * cantidad;
+
+            alert(`El total de la compra es de: $${totalCompra.toFixed(2)}`);
+        }
+
+        function totalRecaudado() {
+            const filas = document.querySelectorAll('#tablaJuegos tr');
+            let total = 0;
+   
+            filas.forEach(fila => {
+                const valor = parseFloat(fila.cells[1].innerText);
+                const cantidad = parseFloat(fila.cells[2].innerText);
+                total += valor * cantidad;
+            });
+
+            alert(`El total recaudado es de: $${total.toFixed(2)}`);
+        }
+
+        
+    </script>
+</body>
+</html>
