@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <h1>Formulario</h1>
+    <form id="accessForm">
+        <label for="tipoCargo">Cargo:</label>
+        <select id="tipoCargo" name="tipoCargo" required>
+            <option value="Docente">Docente</option>
+            <option value="Alumno">Alumno</option>
+        </select><br><br>
+
+        <label for="claveCargo">Clave:</label>
+        <input type="text" id="claveCargo" name="claveCargo" required><br><br>
+
+        <button type="button" onclick="intentoIngreso()">Ingresar</button>
+    </form>
+    
+    <script>
+        function intentoIngreso() {
+            const tipoCargo = document.getElementById("tipoCargo").value;
+            const claveCargo = document.getElementById("claveCargo").value;
+           
+            if (tipoCargo === "Docente" && claveCargo === "123") {
+                alert("Acceso concedido: Docente");
+            } else if (tipoCargo === "Alumno" && claveCargo === "234") {
+                alert("Acceso concedido: Alumno");
+            } else {
+                alert("Error en cargo y/o clave");
+            }
+        }
+    </script>
+</body>
+</html>
